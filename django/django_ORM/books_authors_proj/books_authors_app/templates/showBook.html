@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Authors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+</head>
+<body>
+   <h1>{{thisBook.title}}</h1>
+   <p>ID: {{thisBook.id}}</p>
+   <p>Description: {{thisBook.description}}</p>
+
+   <form action="{% url 'addAuthor' %}" method="POST" class="form-group">
+        {% csrf_token %}
+        <input type="hidden" value="{{thisBook.id}}" name="bookId">
+        <select name="authorId">
+            {% for author in thisBook.myAuthors.all %}
+                <option value="{{author.id}}">{{author.firstName}} {{author.lasttName}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="addAuthor" class="btn btn-primary">
+    </form>
+</body>
+</html>

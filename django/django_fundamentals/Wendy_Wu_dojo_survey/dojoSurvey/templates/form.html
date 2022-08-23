@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey Index</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <form action="/result" method="POST">
+        {% csrf_token %}    
+        <div class="name">
+            Your Name: <input type="text" name="name">
+        </div>
+        
+        <div class="location">
+            Dojo Location: <select name="location" id="location">
+                <option value="san jose">San Jose</option>
+                <option value="chicago">Chicago</option>
+                <option value="dallas">Dallas</option>
+                <option value="seattle">Seattle</option>
+                <option value="dc">DC</option>
+            </select>
+        </div>
+        
+        <div class="language">
+            Favorite Language: <select name="language" id="language">
+                <option value="css">CSS</option>
+                <option value="python">Python</option>
+                <option value="javascript">JavaScript</option>
+            </select> 
+        </div>
+        <h4>Common</h4>
+        <div class="common">
+            <textarea rows="4" cols="50" name="common" id= "common"></textarea>
+        </div>
+        
+        <div class="submit">
+            <input type="submit" value='Button'>
+        </div>
+        
+        </form>
+    </div>
+</body>
+</html>

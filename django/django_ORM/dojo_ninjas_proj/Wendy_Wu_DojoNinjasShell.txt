@@ -1,0 +1,98 @@
+Practice using the Django Shell to run ORM commands to manipulate our database
+Practice one-to-many relationships
+
+Create a new project called dojo_ninjas_proj and an app called dojo_ninjas_app.
+
+-->first get the environment activated, then cd into the folder that I am going to create the project.
+then run those code in terminal-->django-admin startproject dojo_ninjas_proj -->cd dojo_ninjas_proj
+-->python manage.py startapp dojo_ninjas_app
+
+
+For this project, use the following diagram as a guide for creating your models:
+Create the Dojo class model
+-->
+class Dojo(models.Model):
+    name = models.CharField(max_length = 255)
+    city = models.CharField(max_length = 255)
+    state = models.CharField(max_length = 2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+
+    def __str__(self):
+        return '{}'.format(self.name)
+
+
+Create the Ninja class model
+-->
+class Ninja(models.Model):
+    dojo = models.ForeignKey(Dojo,
+                             on_delete=models.CASCADE,
+                             related_name='ninjas')
+    first_name = models.CharField(max_length = 255)
+    last_name = models.CharField(max_length = 255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{} {}'.format(self.first_name, self.last_name)
+
+
+
+Create and run the migration files to create the tables in your database
+--> python manage.py makemigrations-> enter->python manage.py migrate
+
+Create a .txt file where you'll save each of your queries from below
+Run the shell and import your models
+ -->python manage.py shell-->from dojo_ninjas_app.models import * 
+
+Query: Create 3 new dojos
+-->dojo1 = Dojo.objects.create(name = "MJ", city = "San Jose", state = "CA")
+-->dojo2 = Dojo.objects.create(name = "Kai", city = "Saratoga", state = "CA")
+-->dojo3 = Dojo.objects.create(name = "Reeva", city = "San Tomas", state = "CA")
+
+Query: Delete the 3 dojos you just created
+-->Dojo.objects.all().delete()
+
+
+Query: Create 3 more dojos
+-->dojo4 = Dojo.objects.create(name = "James", city = "San Diego", state = "CA")
+-->dojo5 = Dojo.objects.create(name = "Will", city = "Saratoga", state = "CA")
+-->dojo6 = Dojo.objects.create(name = "Reiha", city = "Cupertino", state = "CA")
+
+Query: Create 3 ninjas that belong to the first dojo
+-->ninja1 = Ninja.objects.create(first_name = "John", last_name = "Wu", dojo4)
+-->ninja2 = Ninja.objects.create(first_name = "Jenny", last_name = "Chen", dojo4)
+-->ninja3 = Ninja.objects.create(first_name = "Kate", last_name = "Wu", dojo4)
+
+
+Query: Create 3 ninjas that belong to the second dojo
+-->ninja4 = Ninja.objects.create(first_name = "Alice", last_name = "Chen", dojo5)
+-->ninja5 = Ninja.objects.create(first_name = "Bear", last_name = "Chen", dojo5)
+-->ninja6 = Ninja.objects.create(first_name = "Coco", last_name = "Wu", dojo5)
+
+Query: Create 3 ninjas that belong to the third dojo
+-->ninja7 = Ninja.objects.create(first_name = "Cake", last_name = "Li", dojo6)
+-->ninja8 = Ninja.objects.create(first_name = "Erica", last_name = "Chiang", dojo6)
+-->ninja9 = Ninja.objects.create(first_name = "Rebaca", last_name = "Wu", dojo6)
+
+Query: Retrieve all the ninjas from the first dojo
+-->Dojo.objects.get(id=4).ninjas.all() or (Dojo.objects.first().ninjas.all())
+
+Query: Retrieve all the ninjas from the last dojo
+-->Dojo.objects.last().ninjas.all()
+
+Query: Retrieve the last ninja's dojo
+-->Ninja.objects.last().dojo
+
+Add a new text field called "desc" to your Dojo class
+-->description = models.TextField(default="")
+
+Create and run the migration files to update the table in your database. 
+If needed, provide a default value of "old dojo"
+--> python manage.py makemigrations-> enter->python manage.py migrate
+
+
+Query: Create a new dojo
+-->python manage.py shell-->from dojo_ninjas_app.models import * 
+-->dojo10 = Dojo.objects.create(name = "Kan", city = "San Diego", state = "CA")

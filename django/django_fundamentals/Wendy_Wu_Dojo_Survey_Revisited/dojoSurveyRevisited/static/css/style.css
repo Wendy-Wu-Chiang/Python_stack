@@ -1,0 +1,18 @@
+.container{
+    height: 700px;
+    background-color: cadetblue;
+    padding: 30px;
+}
+
+h1{
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+h1,h4, .name, .location, .language, .submit, .common{
+    padding-left: 450px;
+    margin-bottom: 40px;
+}
+
+
+

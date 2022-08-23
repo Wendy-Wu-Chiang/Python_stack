@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete a course</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete the following course?</h3>
+    <h4>Name:        {{course.name}}</h4>
+    <h4>Description: {{course.description}}</h4>
+    <a href="/">No</a> <a href="/delete/{{course.id}}">Yes! I want to delete this</a>
+</body>
+</html>

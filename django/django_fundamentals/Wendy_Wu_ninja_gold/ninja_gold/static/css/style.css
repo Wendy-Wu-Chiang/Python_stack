@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    margin: 0 auto;
+    width: 900px;
+    background-color:wheat    ;
+}
+
+.location{
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    border: 5px solid black;
+}
+
+.records{
+    width: 842px;
+    border: 5px solid black;
+}
+
+.green{
+    color: green;
+
+}
+
+.red{
+    color: red;
+}

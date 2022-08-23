@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Add a student to all bootcamp courses</title>
+</head>
+
+<body>
+    <h3>Add a new course</h3>
+    {% if messages %}
+    <ul class="messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="/create" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control" required>
+
+            <label for="description">Description</label>
+            <textarea name="description" id="description" cols="30" rows="10" class="form-control" required></textarea>
+        </div>
+        <button class="btn btn-primary">Add</button>
+    </form>
+    <h3>Courses</h3>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in course %}
+            <tr>
+                <td>{{course.name}}</td>
+                <td></td>
+                <td>{{course.created_at}}</td>
+                <td><a href="/courses/destroy/{{course.id}}">remove</a></td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

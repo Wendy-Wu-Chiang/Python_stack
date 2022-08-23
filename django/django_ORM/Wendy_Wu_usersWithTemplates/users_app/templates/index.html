@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users With Templates</title>
+</head>
+<body>
+    <h1>All the Users</h1>
+    <table> 
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+            
+        <tbody>
+            {% for one_user in all_the_users %}
+            <tr>
+                <td>{{one_user.id}}</td>
+                <td>{{one_user.first_name}} {{one_user.last_name}}</td>
+                <td>{{one_user.email_address}}</td>
+                <td>{{one_user.age}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h1>Add a User</h1>
+    <form action="/users/create" method="POST">
+        {% csrf_token %}
+        <label> Name: <input type="text" name="first_name"></label>
+        <label>Last Name: <input type="text" name="last_name"></label>
+        <label>Email: <input type="text" name="email_address"></label>
+        <label>Age: <input type="text" name="age"></label>
+        <input type="submit" value="Add">
+
+    </form>
+
+</body>
+</html>
